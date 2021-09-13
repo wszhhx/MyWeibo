@@ -5,8 +5,23 @@
 <html>
   <head>
     <title>@yield('title','Herhsel Weibo')  Hershel的全栈辅修</title>
+    <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
-    @yield('content') <!-- 表示该占位区将用于显示 content 区块的内容，而content区块内容将由继承自default视图的子视图定义（blade模板支持继承） -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/">Herhsel Weibo App</a>
+        <ul class="navbar-nav justify-content-end">
+          <li class="nav-item"><a class="nav-link" href="/help">帮助</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">登录</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      @yield('content')
+    </div>
+
   </body>
 </html>
