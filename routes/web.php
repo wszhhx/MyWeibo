@@ -22,6 +22,6 @@ use Illuminate\Support\Facades\Route;
 //get表示这个路由将会响应GET请求，并将该请求映射到对应控制器上
 
 //比方说，我们向 weibo.test/ 发出了一个请求，则该请求将会由 StaticPagesController 的 home 方法进行处理[home方法返回的是一个页面名称（string）]
-Route::get('/', 'StaticPagesController@home');
-Route::get('/help', 'StaticPagesController@help');
-Route::get('/about', 'StaticPagesController@about');
+Route::get('/', 'StaticPagesController@home')->name('home');
+Route::get('/help', 'StaticPagesController@help')->name('help');
+Route::get('/about', 'StaticPagesController@about')->name('about');
