@@ -5,7 +5,7 @@
 <html>
   <head>
     <title>@yield('title','Herhsel Weibo')  Hershel的全栈辅修</title>
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   </head>
   <body>
 
