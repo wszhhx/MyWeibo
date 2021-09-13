@@ -8,19 +8,11 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   </head>
   <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="/">Herhsel Weibo App</a>
-        <ul class="navbar-nav justify-content-end">
-          <li class="nav-item"><a class="nav-link" href="/help">帮助</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">登录</a></li>
-        </ul>
-      </div>
-    </nav>
+    @include('layouts._header')  <!--2@include 是 Blade 提供的视图引用方法，可通过传参一个具体的文件路径名称来引用视图。 -->
 
     <div class="container">
       @yield('content')
+      @include('layouts._footer')
     </div>
 
   </body>
