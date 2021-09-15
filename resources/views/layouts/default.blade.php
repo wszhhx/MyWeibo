@@ -11,6 +11,7 @@
     @include('layouts._header')  <!--2@include 是 Blade 提供的视图引用方法，可通过传参一个具体的文件路径名称来引用视图。 -->
 
     <div class="container">
+      @include('shared._messages')
       @yield('content')
       @include('layouts._footer')
     </div>
