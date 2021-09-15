@@ -16,4 +16,19 @@ class UsersController extends Controller
     {
         return view('users.show', compact('user'));
     }
+
+    //存在性验证：required
+    //唯一性验证：unique:目标数据表名
+    //长度验证：min:n   max:n
+    //邮箱验证：email
+    //密码匹配验证：confirmed
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|unique:users|max:50',
+            'email' => 'required|email|unique:users|max:255',
+            'password' => 'required|confirmed|min:6'
+        ]);
+        return;
+    }
 }
