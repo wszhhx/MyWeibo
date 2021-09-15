@@ -28,3 +28,9 @@ Route::get('/about', 'StaticPagesController@about')->name('about');
 Route::get('/signup', 'UsersController@create')->name('signup');
 
 Route::resource('/users', 'UsersController');
+
+//虽然以下两个路由命名完全一致，但由于一个是GET一个是POST，所以Laravel会自动根据请求方式将请求映射到对应控制器中的方法上
+Route::get('/login', 'SessionsController@create')->name('login');
+Route::post('/login', 'SessionsController@store')->name('login');
+//----------------------------------------------------------------
+Route::delete('/logout', 'SessionsController@destroy')->name('logout');

@@ -38,7 +38,9 @@ class UsersController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        session()->flash('success', '欢迎， 您将在这里开启一段新的旅程~');
+        //存入一条缓存数据，并让其只在下一次的请求有效
+        //之后可以使用session()->get('success')通过键获取对应的会话数据
+        session()->flash('success', '欢迎， 您将在这里开启一段新的旅程~');  //param1:会话键   param2:会话值
 
         return redirect()->route('users.show',[$user->id]);
     }
