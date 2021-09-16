@@ -25,7 +25,7 @@ class SessionsController extends Controller
             //登录成功操作
             session()->flash('success', '欢迎回来！');
             //Laravel 提供的 Auth::user() 方法来获取 当前登录用户 的信息，并将数据传送给路由。
-            return redirect()->route('users.show',[Auth::user()]);
+            return redirect()->route('users.show',[Auth::user()->id]);
         }
         else
         {
