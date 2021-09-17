@@ -8,6 +8,23 @@ use Auth;
 
 class UsersController extends Controller
 {
+    //除了show/create/store，其余所有动作都必须登录用户才能访问
+    public function __construct()
+    {
+        //第一个为中间件名称，第二个为要进行过滤的动作
+        $this->middleware('auth',[
+            //except索引的列表中包含不需要过滤的动作（方法名）
+            //only索引的列表包含只要这些动作要过滤
+            'except' => ['show', 'create', 'store']
+        ]);
+
+        $this->middleware('guest',[
+
+            'only' => ['create']
+        ]);
+    }
+
+
     public function create()
     {
         return view('users.create');
@@ -15,12 +32,7 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        if (Auth::check()){
-            return view('users.show', compact('user'));
-        }else{
-            return redirect()->route('home');
-        }
-
+        return view('users.show', compact('user'));
     }
 
     //存在性验证：required
@@ -31,6 +43,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //验证用户输入的数据
+        //仅能限制未登录用户的操作
         $this->validate($request, [
             'name' => 'required|unique:users|max:50',
             'email' => 'required|email|unique:users|max:255',
@@ -55,11 +68,14 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        //第一个参数为对应授权类里的验证方法名，$user对应update授权方法的第二个参数
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
     public function update(User $user, Request $request)
     {
+        $this->authorize('update', $user);
         $this->validate($request, [
             'name' => 'required|max:50',
             'password' => 'nullable|confirmed|min:6'
