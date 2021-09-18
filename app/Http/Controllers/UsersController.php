@@ -15,11 +15,10 @@ class UsersController extends Controller
         $this->middleware('auth',[
             //except索引的列表中包含不需要过滤的动作（方法名）
             //only索引的列表包含只要这些动作要过滤
-            'except' => ['show', 'create', 'store']
+            'except' => ['show', 'create', 'store', 'index']
         ]);
 
         $this->middleware('guest',[
-
             'only' => ['create']
         ]);
     }
@@ -92,5 +91,12 @@ class UsersController extends Controller
         session()->flash('success', '个人资料更新成功');
 
         return redirect()->route('users.show', $user->id);
+    }
+
+    public function index()
+    {
+        //指定每页生成的数据数量为6条
+        $users = User::paginate(6);
+        return view('users.index', compact('users'));
     }
 }
